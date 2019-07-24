@@ -1,0 +1,26 @@
+{
+  "name": "axios-rest-api",
+  "version": "0.0.1",
+  "description": "Simple Axios wrapper for simple REST Api requests",
+  "main": "Api.js",
+  "dependencies": {
+    "underscore": "^1.9.1"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/freedomsex/axios-rest-api.git"
+  },
+  "keywords": [
+    "axios",
+    "rest",
+    "api",
+    "client"
+  ],
+  "author": "tebaly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freedomsex/axios-rest-api/issues"
+  },
+  "homepage": "https://github.com/freedomsex/axios-rest-api#readme"
+}

@@ -1,0 +1,15 @@
+export default {
+  get: '{id}',
+  cget: '',
+  post: '',
+  delete: '{id}',
+  put: '{id}',
+  patch: '{id}',
+  option: '{id}',
+  load: '',
+  send: '',
+  new: 'new',
+  save: 'save',
+  edit: 'edit/{id}',
+  remove: 'remove/{id}',
+};
