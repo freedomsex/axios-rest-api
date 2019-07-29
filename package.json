@@ -1,12 +1,17 @@
 {
   "name": "axios-rest-api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Simple Axios wrapper for simple REST Api requests",
-  "main": "Api.js",
+  "main": "dist/main.js",
+  "module": "src/index.js",
   "dependencies": {
+    "axios": "^0.19.0",
     "underscore": "^1.9.1"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "webpack -p --progress",
+    "test": "babel-node ./node_modules/.bin/jasmine --config=test/config/jasmine.json || true"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/freedomsex/axios-rest-api.git"
@@ -22,5 +27,17 @@
   "bugs": {
     "url": "https://github.com/freedomsex/axios-rest-api/issues"
   },
-  "homepage": "https://github.com/freedomsex/axios-rest-api#readme"
+  "homepage": "https://github.com/freedomsex/axios-rest-api#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.1.0",
+    "eslint-loader": "^2.2.1",
+    "jasmine": "^3.4.0",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
+  }
 }
