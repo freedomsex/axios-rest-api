@@ -2,28 +2,61 @@ import _ from 'underscore';
 
 import requests from './requests';
 
-export default class core extends requests {
+export default class core extends requests { 
+
+  define(name, resource) {
+    this.resources[name] = resource;
+  }
+
+  extend(name, resource) {
+    _.extend(this.resources[name], resource);
+  }
+
   setDelay(sec) {
     this.wait = sec ? sec * 1000 : 0;
     return this;
   }
 
-  setConfig(url, key) {
-    this.config = {
-      baseURL: url || this.defaults.baseURL,
-      headers: {
-        Authorization: `Bearer ${key || this.defaults.key}`,
-      },
-    };
+  setHeaders(headers) { 
+    if (headers) {
+      _.extend(this.config, { headers });
+    }    
+  } 
+
+  setBaseURL(url) {
+    let base = url || this.defaults.baseURL || null;
+    if (base) {
+      this.config.baseURL = base;
+    }    
+  }
+
+  isAuth() {
+    return this.config.headers && this.config.headers.Authorization;
+  }
+
+  setAuthKey(key, name) {
+    let authKey = key || this.defaults.key;
+    if (authKey) {
+      this.setHeaders({ Authorization: `Bearer ${key}` });  
+    }
+    if (name) {
+      this.extend(name, {key: authKey});
+    }
     return this;
   }
 
-  setAuthKey(key) {
-    _.extend(this.config.headers, {
-      Authorization: `Bearer ${key}`,
-    });
-    this.config.key = key;
-    return this;
+  // setConfig(url, key) {
+  //   this.setBaseURL(url);
+  //   this.setAuthKey(key); 
+  //   return this;
+  // }
+
+  setAxiosConfig(config) {
+    _.extend(this.config, config);
+  }
+
+  dumpAxiosConfig() {
+    return this.config;
   }
 
 }

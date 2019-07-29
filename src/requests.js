@@ -67,6 +67,7 @@ export default class requests {
     } else {
       result = axios[method](URI, this.config);
     }
+    this.clear(); // index.js
     return this.delay(result, wait);
   }
 

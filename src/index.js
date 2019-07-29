@@ -7,16 +7,12 @@ export default class Api extends Core {
     super();
     this.resources = resources || [];
     this.defaults = {}; 
+    this.config = {}; 
     this.router = new Router();
   }
-
-  getConfig(name) {
-    // this.name = name || 'default';
-    const config = this.resources[name] || {};
-    _.defaults(config, this.resources.default);
-    // console.log('name', [name, config]);
-    // console.log('default', this.resources.default);
-    return config;
+ 
+  clear() {
+    this.config = {};
   }
 
   res(resource, apiName) {
@@ -24,16 +20,22 @@ export default class Api extends Core {
     return this.setResource(resource);
   }
 
+  getConfig(name) { 
+    const config = this.resources[name] || {}; 
+    return _.defaults(config, this.resources.default); 
+  }
+
   setApi(name) {
     let config = this.getConfig(name);
-    this.host = config.host || '';
-    const version = config.version || '';
-    const prefix = config.prefix || '';
-
-    this.setDelay(config.delay || 0);
-    this.setConfig(this.root, config.key || '');
-
-    this.router.init(this.host, prefix, version);
+    this.router.init(
+      config.host, 
+      config.prefix, 
+      config.version
+    ); 
+    this.setDelay(config.delay);
+    if (!this.isAuth()) {
+      this.setAuthKey(config.key);
+    }   
   }
 
   setResource(name) {
