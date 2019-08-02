@@ -44,13 +44,6 @@ export default class Api extends Core {
     return this;
   }
 
-  default(key, val) {
-    if (val !== undefined) {
-      this.defaults[key] = val;
-    }
-    return this.defaults[key];
-  }
-
   baseURL() {
     return this.root;
   }

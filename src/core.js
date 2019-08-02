@@ -12,6 +12,13 @@ export default class core extends requests {
     _.extend(this.resources[name], resource);
   }
 
+  default(key, val) {
+    if (val !== undefined) {
+      this.defaults[key] = val;
+    }
+    return this.defaults[key];
+  }
+
   setDelay(sec) {
     this.wait = sec ? sec * 1000 : 0;
     return this;
@@ -37,7 +44,7 @@ export default class core extends requests {
   setAuthKey(key, name) {
     let authKey = key || this.defaults.key;
     if (authKey) {
-      this.setHeaders({ Authorization: `Bearer ${key}` });  
+      this.setHeaders({ Authorization: `Bearer ${authKey}` });  
     }
     if (name) {
       this.extend(name, {key: authKey});
