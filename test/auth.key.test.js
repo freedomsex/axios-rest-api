@@ -67,3 +67,39 @@ describe('Авторизация по умолчанию', () => {
     });
  
 });
+
+describe('Переписать по умолчанию', () => {
+    let $api;
+    beforeEach(() => { 
+        let resources = []; 
+        resources.default = { }; 
+        resources.users = { };
+        $api = new Api(resources);
+    });
+
+    it('запрос по умолчанию', () => {
+        $api.res();
+        expect($api.dumpAxiosConfig()).toEqual({}); 
+    });
+
+    it('установить на запрос', () => {
+        let req;
+        req = $api.res();
+        $api.setAuthKey('otherkey');
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} });
+        req.load().catch(() => {}); // очистится
+        expect($api.dumpAxiosConfig()).toEqual({}); 
+    });
+
+    it('установить по умолчанию', () => {
+        let req;
+        req = $api.res();
+        $api.setAuthKey('otherkey', 'default');
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} });
+        req.load().catch(() => {}); // не очистится
+        req = $api.res();
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} }); 
+        // expect($api.default('key')).toEqual('otherkey'); 
+    });
+ 
+});

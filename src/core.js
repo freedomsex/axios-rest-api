@@ -41,13 +41,17 @@ export default class core extends requests {
     return this.config.headers && this.config.headers.Authorization;
   }
 
+  saveAuthKey(key, name) {
+    this.extend(name, {key});
+  }
+
   setAuthKey(key, name) {
     let authKey = key || this.defaults.key;
     if (authKey) {
       this.setHeaders({ Authorization: `Bearer ${authKey}` });  
     }
     if (name) {
-      this.extend(name, {key: authKey});
+      this.saveAuthKey(authKey, name); 
     }
     return this;
   }
