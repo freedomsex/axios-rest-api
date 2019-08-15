@@ -101,5 +101,17 @@ describe('Переписать по умолчанию', () => {
         expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} }); 
         // expect($api.default('key')).toEqual('otherkey'); 
     });
+
+    it('сохранить по умолчанию', () => {
+        let req;
+        $api.saveAuthKey('otherkey', 'users');
+        req = $api.res('save/data', 'users');
+        // expect($api.getConfig('users')).toEqual();
+        expect($api.isAuth()).toBeTruthy();
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} });
+        req.load().catch(() => {}); // не очистится
+        req = $api.res('delete', 'users');
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} }); 
+    });
  
 });

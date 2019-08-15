@@ -62,6 +62,7 @@ export default class requests {
   request(method, action, data, params, url, wait) {
     let result = null;
     const URI = this.router.setUrl(action, params, url);
+    this.config.params = this.router.params;
     if (data) {
       result = axios[method](URI, data, this.config);
     } else {

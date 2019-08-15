@@ -60,4 +60,9 @@ describe('Создание ресурсов', () => {
         $api.res('popular', 'auth').get({id: 1234}).catch(() => {});
         expect($api.lastURL()).toBe('http://auth/api/v1/popular/1234'); 
     });
+
+    // it('запросить ресурс query', () => { 
+    //     $api.res('popular', 'auth').load({id: 1234, sort: 'desc'}).catch(() => {});
+    //     expect($api.dumpAxiosConfig()).toBe('http://auth/api/v1/popular?id=1234&sort=desc'); 
+    // });
 });
