@@ -52,18 +52,22 @@ export default class requests {
   }
 
   patch(data, params, url, wait) {
-    return this.request('patch', 'patch', data, params, url, wait);
+    return this.request('patch', 'patch', data || {}, params, url, wait);
   }
 
   option(params, url, wait) {
     return this.request('option', 'option', null, params, url, wait);
   }
 
+  axiosData(data, method) {
+    return data || ['post', 'put', 'patch'].includes(method);
+  }
+
   request(method, action, data, params, url, wait) {
     let result = null;
     const URI = this.router.setUrl(action, params, url);
     this.config.params = this.router.params;
-    if (data) {
+    if (this.axiosData(data, method)) {
       result = axios[method](URI, data, this.config);
     } else {
       result = axios[method](URI, this.config);
