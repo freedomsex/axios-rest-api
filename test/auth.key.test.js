@@ -113,5 +113,24 @@ describe('Переписать по умолчанию', () => {
         req = $api.res('delete', 'users');
         expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} }); 
     });
+
+    it('обновление по умолчанию', () => {
+        let req;
+        req = $api.res();
+        $api.saveAuthKey('somekey', 'default');
+        expect($api.dumpAxiosConfig()).toEqual({});
+        req = $api.res();
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer somekey'} }); 
+        req.load().catch(() => {}); // !!! ОЧИСТИЛСЯ !!!
+        expect($api.dumpAxiosConfig()).toEqual({}); 
+
+        $api.saveAuthKey('otherkey', 'default');
+        req = $api.res();
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} }); 
+        req.load().catch(() => {});
+        req = $api.res();
+
+        expect($api.dumpAxiosConfig()).toEqual({ headers: {Authorization: 'Bearer otherkey'} });
+    });
  
 });
