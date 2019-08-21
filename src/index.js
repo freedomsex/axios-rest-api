@@ -22,7 +22,8 @@ export default class Api extends Core {
 
   getConfig(name) { 
     const config = this.resources[name] || {}; 
-    return _.defaults(config, this.resources.default); 
+    const copy = Object.assign({}, config);
+    return _.defaults(copy, this.resources.default); 
   }
 
   setApi(name) {
