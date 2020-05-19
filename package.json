@@ -1,6 +1,6 @@
 {
   "name": "axios-rest-api",
-  "version": "0.1.17",
+  "version": "1.0.0",
   "description": "Simple Axios wrapper for simple REST Api requests",
   "main": "dist/main.js",
   "browser": "dist/main.js",
