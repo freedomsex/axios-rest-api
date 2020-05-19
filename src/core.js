@@ -28,7 +28,6 @@ export default class core extends requests {
     if (headers) {
       _.defaults(this.config, { headers: {} });
       _.extend(this.config.headers, headers);
-      console.log(['config', this.config]);
     }    
   } 
 
