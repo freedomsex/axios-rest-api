@@ -2,9 +2,14 @@ import _ from 'underscore';
 import axios from 'axios';
 
 export default class requests {
+  constructor(config, omitEmpty) {
+    this.omitEmpty = (omitEmpty === true);
+    this.axiosInstance = axios.create(config);
+  }
+
   // eslint-disable-next-line
   axios() {
-    return axios;
+    return this.axiosInstance;
   }
 
   get(params, url, wait) {
@@ -63,14 +68,34 @@ export default class requests {
     return data || ['post', 'put', 'patch'].includes(method);
   }
 
+  adaptParams(params) {
+    if (!this.omitEmpty) {
+      return params;
+    } 
+    function prune(object) {
+      object = _.mapObject(object, value => {
+        if (_.isObject(value)) {
+          if (_.isEmpty(value)) {
+            return null;
+          }
+          return prune(value);
+        }
+        return value;
+      });
+      return _.pick(object, value => value !== '' && !_.isNull(value) && !_.isNaN(value) && !_.isUndefined(value));
+    }
+    return prune(params);
+  }
+
   request(method, action, data, params, url, wait) {
     let result = null;
     const URI = this.router.setUrl(action, params, url);
-    this.config.params = this.router.params;
+    // this.config.params = this.router.params; 
+    this.config.params = this.adaptParams(this.router.params);
     if (this.axiosData(data, method)) {
-      result = axios[method](URI, data, this.config);
+      result = this.axiosInstance[method](URI, data, this.config);
     } else {
-      result = axios[method](URI, this.config);
+      result = this.axiosInstance[method](URI, this.config);
     }
     this.clear(); // index.js
     return this.delay(result, wait);

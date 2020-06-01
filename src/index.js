@@ -3,15 +3,17 @@ import Core from './core';
 import Router from './router';
 
 export default class Api extends Core {
-  constructor(resources) {
-    super();
+  constructor(resources, axiosConfig, omitEmptyParams) {
+    super(axiosConfig, omitEmptyParams);
     this.resources = resources || [];
     this.defaults = {}; 
     this.config = {}; 
+    this.lastConfig = {}; 
     this.router = new Router();
   }
  
   clear() {
+    this.lastConfig = Object.assign({}, this.config);
     this.config = {};
   }
 
@@ -51,6 +53,16 @@ export default class Api extends Core {
 
   lastURL() {
     return this.router.url;
+  }
+
+  // getUri(config) {
+  //   console.log(this.axiosInstance.getUri({}));
+    
+  //   // return this.axiosInstance.getUri(config || this.lastConfig);
+  // }
+
+  lastAxiosConfig() {
+    return this.lastConfig;
   }
 
 }
