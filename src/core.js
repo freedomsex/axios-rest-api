@@ -20,7 +20,7 @@ export default class core extends requests {
   }
 
   setDelay(sec) {
-    this.wait = sec ? sec * 1000 : 0;
+    this.wait = sec || 0;
     return this;
   }
 

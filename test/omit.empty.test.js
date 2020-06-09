@@ -18,35 +18,35 @@ describe('Omit Empty:', () => {
         $api = new Api(resources, config, true);
     });
 
-    it('object', () => {
-        $api.res('some').load({q: 1, a: {b: 1, c: 2}});
+    it('object', async () => {
+        await $api.res('some').load({q: 1, a: {b: 1, c: 2}}).catch(() => {});
         expect($api.lastAxiosConfig().params).toEqual({q: 1, a: {b: 1, c: 2}}); 
     });
 
-    it('empty object', () => {
-        $api.res('some').load({q: 1, a: {}});
+    it('empty object', async () => {
+        await $api.res('some').load({q: 1, a: {}}).catch(() => {});
         expect($api.lastAxiosConfig().params).toEqual({q: 1}); 
     });
 
-    it('null', () => {
-        $api.res('some').load({q: 1, a: null});
+    it('null', async () => {
+        await $api.res('some').load({q: 1, a: null}).catch(() => {});
         expect($api.lastAxiosConfig().params).toEqual({q: 1}); 
     });
 
-    it('object with null', () => {
-        $api.res('some').load({q: 1, a: {b: 1, c: null}});
+    it('object with null', async () => {
+        await $api.res('some').load({q: 1, a: {b: 1, c: null}}).catch(() => {});
         expect($api.lastAxiosConfig().params).toEqual({q: 1, a: {b: 1}}); 
-        $api.res('some').load({q: null, a: {b: 1, c: 2}});
+        await $api.res('some').load({q: null, a: {b: 1, c: 2}}).catch(() => {});
         expect($api.lastAxiosConfig().params).toEqual({a: {b: 1, c: 2}}); 
     });
 
-    it('empty array', () => {
-        $api.res('some').load({q: 1, a: []});
+    it('empty array', async () => {
+        await $api.res('some').load({q: 1, a: []}).catch(() => {});
         expect($api.lastAxiosConfig().params).toEqual({q: 1}); 
     });
 
-    it('all empty', () => {
-        $api.res('some').load({q: null, a: {}, c: ''});
+    it('all empty', async () => {
+        await $api.res('some').load({q: null, a: {}, c: ''}).catch(() => {});
         expect($api.lastAxiosConfig().params).toEqual({}); 
     });
   

@@ -21,9 +21,9 @@ describe('AXIOS Config', () => {
         $api = new Api(resources, config);
     });
 
-    it('QS params', () => {
+    it('QS params', async () => {
         let params = {q: 1, a: {b: 1, c: 2}};
-        $api.res('some').load(params);
+        await $api.res('some').load(params).catch(() => {});
         // console.log($api.getUri());
         // expect($api.lastAxiosConfig().paramsSerializer(params)).toEqual({q: 1, a: {b: 1, c: 2}}); 
     });

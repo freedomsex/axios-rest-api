@@ -4,7 +4,7 @@ import axios from 'axios';
 export default class requests {
   constructor(config, omitEmpty) {
     this.omitEmpty = (omitEmpty === true);
-    this.axiosInstance = axios.create(config);
+    this.axiosInstance = axios.create(config || {});
   }
 
   // eslint-disable-next-line
@@ -87,7 +87,8 @@ export default class requests {
     return prune(params);
   }
 
-  request(method, action, data, params, url, wait) {
+  async request(method, action, data, params, url, wait) {
+    await this.delay(wait);
     let result = null;
     const URI = this.router.setUrl(action, params, url);
     // this.config.params = this.router.params; 
@@ -97,20 +98,21 @@ export default class requests {
     } else {
       result = this.axiosInstance[method](URI, this.config);
     }
-    this.clear(); // index.js
-    return this.delay(result, wait);
+    return result.finally(() => {
+      this.clear(); // index.js 
+    }); 
   }
 
-  delay(result, wait) {
-    let msec = wait || this.wait || 0;
-    if (msec < this.wait) {
-      msec = this.wait;
+  async delay(wait) {
+    let seconds = wait || this.wait || 0;
+    if (seconds < this.wait) {
+      seconds = this.wait;
     }
-    if (msec == 0 || typeof Promise === 'undefined') {
-      return result;
+    if (!seconds) {
+      return Promise.resolve();
     }
     return new Promise((resolve) => {
-      _.delay(resolve, msec, result);
+      _.delay(resolve, seconds * 1000);
     });
   }
 }
