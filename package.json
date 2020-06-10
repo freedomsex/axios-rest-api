@@ -1,12 +1,12 @@
 {
   "name": "axios-rest-api",
-  "version": "1.1.7",
+  "version": "1.1.6",
   "description": "Simple Axios wrapper for simple REST Api requests",
   "type": "module",
-  "main": "./index.js",
-  "module": "./index.js",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "exports": {
-    "import": "./index.js"
+    "import": "./src/index.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
