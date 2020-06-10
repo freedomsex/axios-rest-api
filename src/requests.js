@@ -88,11 +88,11 @@ export default class requests {
   }
 
   async request(method, action, data, params, url, wait) {
-    await this.delay(wait);
     let result = null;
     const URI = this.router.setUrl(action, params, url);
     // this.config.params = this.router.params; 
     this.config.params = this.adaptParams(this.router.params);
+    await this.delay(wait);
     if (this.axiosData(data, method)) {
       result = this.axiosInstance[method](URI, data, this.config);
     } else {
