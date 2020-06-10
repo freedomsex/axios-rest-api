@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.6](https://github.com/freedomsex/axios-rest-api/compare/v1.1.5...v1.1.6) (2020-06-10)
+
+
+### Bug Fixes
+
+* last 5 ver chrome ([7c43e07](https://github.com/freedomsex/axios-rest-api/commit/7c43e075b89bfcc20971ab29ef93bf6736694768))
+
 ### [1.1.5](https://github.com/freedomsex/axios-rest-api/compare/v1.1.4...v1.1.5) (2020-06-10)
 
 
