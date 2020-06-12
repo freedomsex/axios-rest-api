@@ -1,14 +1,11 @@
 {
   "name": "axios-rest-api",
-  "version": "1.1.6",
+  "version": "1.1.9",
   "description": "Simple Axios wrapper for simple REST Api requests",
-  "type": "module",
-  "main": "./src/index.js",
+  "main": "./dest/main.js",
   "module": "./src/index.js",
-  "exports": {
-    "import": "./src/index.js"
-  },
   "dependencies": {
+    "@babel/runtime": "^7.10.2",
     "axios": "^0.19.2",
     "underscore": "^1.10.2"
   },
@@ -35,6 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
