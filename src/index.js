@@ -36,7 +36,7 @@ export default class Api extends Core {
       config.version
     ); 
     this.setDelay(config.delay);
-    if (!this.isAuth()) {
+    if (!this.isAuth() && config.authorized !== false) {
       this.setAuthKey(config.key);
     }   
   }
