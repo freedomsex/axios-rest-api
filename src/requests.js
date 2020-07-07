@@ -98,8 +98,10 @@ export default class requests {
     } else {
       result = this.axiosInstance[method](URI, this.config);
     }
-    this.clear(); // index.js 
-    return result; 
+    
+    return result.finally(() => {
+      this.clear(); // index.js 
+    }); 
   }
 
   async delay(wait) {
