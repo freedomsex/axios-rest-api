@@ -92,16 +92,16 @@ export default class requests {
     const URI = this.router.setUrl(action, params, url);
     // this.config.params = this.router.params; 
     this.config.params = this.adaptParams(this.router.params);
-    await this.delay(wait);
     if (this.axiosData(data, method)) {
       result = this.axiosInstance[method](URI, data, this.config);
     } else {
       result = this.axiosInstance[method](URI, this.config);
     }
-    
-    return result.finally(() => {
+    result = result.finally(() => {
       this.clear(); // index.js 
-    }); 
+    });
+    await this.delay(wait);
+    return result; 
   }
 
   async delay(wait) {
