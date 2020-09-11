@@ -94,7 +94,7 @@ export default class requests {
     // this.config.params = this.router.params; 
     this.config.params = this.adaptParams(this.router.params);
     this.currentRequest = this.CancelToken.source();
-    this.config.cancelToken = this.currentRequest;
+    this.config.cancelToken = this.currentRequest.token;
     if (this.axiosData(data, method)) {
       result = this.axiosInstance[method](URI, data, this.config);
     } else {
