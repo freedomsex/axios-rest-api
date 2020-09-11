@@ -5,6 +5,7 @@ export default class requests {
   constructor(config, omitEmpty) {
     this.omitEmpty = (omitEmpty === true);
     this.axiosInstance = axios.create(config || {});
+    this.CancelToken = axios.CancelToken; 
   }
 
   // eslint-disable-next-line
@@ -92,6 +93,8 @@ export default class requests {
     const URI = this.router.setUrl(action, params, url);
     // this.config.params = this.router.params; 
     this.config.params = this.adaptParams(this.router.params);
+    this.currentRequest = this.CancelToken.source();
+    this.config.cancelToken = this.currentRequest;
     if (this.axiosData(data, method)) {
       result = this.axiosInstance[method](URI, data, this.config);
     } else {
@@ -102,6 +105,10 @@ export default class requests {
     });
     await this.delay(wait);
     return result; 
+  }
+
+  cancel() {
+    this.currentRequest.cancel();
   }
 
   async delay(wait) {
