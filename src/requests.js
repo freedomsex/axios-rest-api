@@ -108,11 +108,11 @@ export default class requests {
   }
 
   current() {
-    this.currentRequest;
+    return this.currentRequest;
   }
 
   cancel(request) {
-    request = request || this.currentRequest;
+    request = request || this.current();
     request.cancel();
   }
 
