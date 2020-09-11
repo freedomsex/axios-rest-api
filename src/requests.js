@@ -111,8 +111,9 @@ export default class requests {
     this.currentRequest;
   }
 
-  cancel() {
-    this.currentRequest.cancel();
+  cancel(request) {
+    request = request || this.currentRequest;
+    request.cancel();
   }
 
   async delay(wait) {
