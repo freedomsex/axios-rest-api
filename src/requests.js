@@ -6,6 +6,7 @@ export default class requests {
     this.omitEmpty = (omitEmpty === true);
     this.axiosInstance = axios.create(config || {});
     this.CancelToken = axios.CancelToken; 
+    this.currentRequest = this.CancelToken.source();
   }
 
   // eslint-disable-next-line
@@ -93,7 +94,6 @@ export default class requests {
     const URI = this.router.setUrl(action, params, url);
     // this.config.params = this.router.params; 
     this.config.params = this.adaptParams(this.router.params);
-    this.currentRequest = this.CancelToken.source();
     this.config.cancelToken = this.currentRequest.token;
     if (this.axiosData(data, method)) {
       result = this.axiosInstance[method](URI, data, this.config);
