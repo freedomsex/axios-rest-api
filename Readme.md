@@ -22,10 +22,10 @@ api.load(null, 'https://www.google.com?q=123').then((response) => {
 });
 
 // Здесь параметры запроса уже вынесены из URL в параметры вызова метода
-api.load({g: 123}, 'https://www.google.com');
+api.load({q: 123}, 'https://www.google.com');
 
 // Здесь и параметры убраны, но и сам URL отсутствует
-api.res('google').load({g: 123}); // URL вынесен в конфигурацию, описание ниже
+api.res('google').load({q: 123}); // URL вынесен в конфигурацию, описание ниже
 ```
 
 ## Методы запросов
