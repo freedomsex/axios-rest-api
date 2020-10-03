@@ -46,8 +46,8 @@ export default class core extends requests {
     return this.config.headers && this.config.headers.Authorization;
   }
 
-  auth(key, name) {
-    this.saveAuthKey(key, name);
+  auth(key) {
+    this.setAuthKey(key);
     return this;
   }
 
