@@ -66,7 +66,7 @@ resources.some = {
   host: 'http://127.0.0.1',
   prefix: 'api',
   version: 'v2',
-  base: '',
+  postfix: '',
   authorized: false,
   key: 'someAuthKey',
   delay: 3,
@@ -89,6 +89,15 @@ resources.some = {
 }
 
 ```
+
+URL формируется следующим образом `${host}/${prefix}${version}${postfix}`
+
+* host: 'http://127.0.0.1'
+* prefix: 'api' - не обязательно
+* version: 'v2' - не обязательно
+* postfix: 'some' - не обязательно
+
+Итого `http://127.0.0.1/api/v2/some` и дальше в соответствии с конфигом ресурса. Нельзя указать `routing: { route: 'some/string' }` для всех ресурсов конкретного сервера АПИ в конфигурации. Для сервера можно указать `prefix` или `postfix`. Возможность явно указать `route` существует только в контексте конкретного ресурса.
 
 ### Ресурсы
 
@@ -148,10 +157,7 @@ api.res('users').post({name: 'Bob'}); // POST http://127.0.0.1/api/users
 api.res('users').load({id: 1, sort: 'asc'});
 // GET http://127.0.0.1/api/users/any/other/user?id=1&sort=asc
 ```
-
-```javascript
-root = `${host}/${prefix}${version}${postfix}`;
-```
+ 
 
 Стандартный роутер библиотеки. В комментариях реальный метод запроса отправляемого на сервер. Из них *get, post, put, patch, delete, options* являются общепринятыми, остальные добавлены библиотекой и не являются обязательными.
 
