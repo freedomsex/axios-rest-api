@@ -6,10 +6,12 @@ export default class core extends requests {
 
   define(name, resource) {
     this.resources[name] = resource;
+    return this;
   }
 
   extend(name, resource) {
     _.extend(this.resources[name], resource);
+    return this;
   }
 
   default(key, val) {
@@ -29,21 +31,29 @@ export default class core extends requests {
       _.defaults(this.config, { headers: {} });
       _.extend(this.config.headers, headers);
     }    
+    return this;
   } 
 
   setBaseURL(url) {
     let base = url || this.defaults.baseURL || null;
     if (base) {
       this.config.baseURL = base;
-    }    
+    }   
+    return this; 
   }
 
   isAuth() {
     return this.config.headers && this.config.headers.Authorization;
   }
 
+  auth(key, name) {
+    this.saveAuthKey(key, name);
+    return this;
+  }
+
   saveAuthKey(key, name) {
     this.extend(name, {key});
+    return this;
   }
 
   setAuthKey(key, name) {
@@ -65,6 +75,7 @@ export default class core extends requests {
 
   setAxiosConfig(config) {
     _.extend(this.config, config);
+    return this;
   }
 
   dumpAxiosConfig() {

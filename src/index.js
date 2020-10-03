@@ -15,6 +15,7 @@ export default class Api extends Core {
   clear() {
     this.lastConfig = Object.assign({}, this.config);
     this.config = {};
+    return this;
   }
 
   res(resource, apiName) {
@@ -38,7 +39,8 @@ export default class Api extends Core {
     this.setDelay(config.delay);
     if (!this.isAuth() && config.authorized !== false) {
       this.setAuthKey(config.key);
-    }   
+    }  
+    return this; 
   }
 
   setResource(name) {
