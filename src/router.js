@@ -9,10 +9,11 @@ export default class Router {
     this.params = {};
   }
 
-  init(host, prefix, version) {
+  init(host, prefix, version, postfix) {
     const ver = version ? `${version}/` : '';
     const pre = prefix ? `${prefix}/` : '';
-    this.root = `${host}/${pre}${ver}`;
+    const post = postfix ? `${postfix}/` : '';
+    this.root = `${host}/${pre}${ver}${post}`;
     return this; 
   }
 

@@ -34,7 +34,8 @@ export default class Api extends Core {
     this.router.init(
       config.host, 
       config.prefix, 
-      config.version
+      config.version, 
+      config.postfix
     ); 
     this.setDelay(config.delay);
     if (!this.isAuth() && config.authorized !== false) {
