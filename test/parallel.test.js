@@ -19,8 +19,7 @@ describe('Создание ресурсов', () => {
         }
         await $api.res('same').load({id: 1}).catch((e) => {
             // expect(e.request._currentUrl).toBe('http://some/api/v1/same?someId=5');  
-            expect(e.request.path).toBe('/api/same?id=1');  
-            
+            expect(e.request.path).toBe('/api/same?id=1');   
         });
         // expect($api.lastURL()).toBe('http://some/api/v1/same?id=3'); 
         // expect($api.lastAxiosConfig()).toBe({}); 

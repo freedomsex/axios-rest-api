@@ -16,21 +16,21 @@ describe('Проверить авторизацию', () => {
     });
 
     it('запрос без base', () => {
-        $api.res();
-        expect($api.dumpAxiosConfig()).toEqual({}); 
+        let api = $api.res();
+        expect(api.dumpAxiosConfig()).toEqual({}); 
     });
 
     it('установить base', () => {
-        $api.setBaseURL('baseurl');
-        $api.res();
-        expect($api.dumpAxiosConfig()).toEqual({baseURL: 'baseurl'}); 
+        let api = $api.res();
+        api.setBaseURL('baseurl');
+        expect(api.dumpAxiosConfig()).toEqual({baseURL: 'baseurl'}); 
     });
 
     it('установить auth & base ', () => {
-        $api.setAuthKey('authkey');
-        $api.setBaseURL('baseurl');
-        $api.res();
-        expect($api.dumpAxiosConfig()).toEqual({baseURL: 'baseurl', headers: {
+        let api = $api.res();
+        api.auth('authkey');
+        api.setBaseURL('baseurl');
+        expect(api.dumpAxiosConfig()).toEqual({baseURL: 'baseurl', headers: {
             Authorization: 'Bearer authkey',
         }}); 
     });

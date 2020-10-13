@@ -1,26 +1,29 @@
 import _ from 'underscore';
-import Core from './core';
-import Router from './router';
+import Builder from './builder';
 
-export default class Api extends Core {
+export default class Api {
   constructor(resources, axiosConfig, omitEmptyParams) {
-    super(axiosConfig, omitEmptyParams);
     this.resources = resources || [];
     this.defaults = {}; 
-    this.config = {}; 
-    this.lastConfig = {}; 
-    this.router = new Router();
+    this.axiosConfig = axiosConfig;
+    this.omitEmptyParams = omitEmptyParams;
   }
- 
-  clear() {
-    this.lastConfig = Object.assign({}, this.config);
-    this.config = {};
+
+  default(key, val) {
+    if (val !== undefined) {
+      this.defaults[key] = val;
+    }
+    return this.defaults[key];
+  }
+
+  define(name, resource) {
+    this.resources[name] = resource;
     return this;
   }
 
-  res(resource, apiName) {
-    this.setApi(apiName || resource);
-    return this.setResource(resource);
+  extend(name, resource) {
+    _.extend(this.resources[name], resource);
+    return this;
   }
 
   getConfig(name) { 
@@ -29,43 +32,22 @@ export default class Api extends Core {
     return _.defaults(copy, this.resources.default); 
   }
 
-  setApi(name) {
-    let config = this.getConfig(name);
-    this.router.init(
-      config.host, 
-      config.prefix, 
-      config.version, 
-      config.postfix
-    ); 
-    this.setDelay(config.delay);
-    if (!this.isAuth() && config.authorized !== false) {
-      this.setAuthKey(config.key);
-    }  
-    return this; 
+  res(resource, name) {
+    let builder = new Builder(this); 
+    builder.setApi(this.getConfig(name || resource));
+    builder.setResource(this.getConfig(resource), resource);
+    return builder;
   }
-
-  setResource(name) {
-    let config = this.getConfig(name);
-    this.router.setRouting(config.routing || {}, name);
+  
+  auth(key, name) { 
+    if (key) {
+      if (name) {
+        this.extend(name, {key});
+      } else {
+        this.default('key', key); 
+      } 
+    }
     return this;
   }
-
-  baseURL() {
-    return this.root;
-  }
-
-  lastURL() {
-    return this.router.url;
-  }
-
-  // getUri(config) {
-  //   console.log(this.axiosInstance.getUri({}));
-    
-  //   // return this.axiosInstance.getUri(config || this.lastConfig);
-  // }
-
-  lastAxiosConfig() {
-    return this.lastConfig;
-  }
-
+   
 }

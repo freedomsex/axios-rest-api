@@ -9,10 +9,10 @@ describe('Проверить заголовки', () => {
     }); 
 
     it('установить ключ', () => {
-        $api.setAuthKey('authkey');
-        $api.res();
-        $api.setHeaders({content: 'first'});
-        expect($api.dumpAxiosConfig()).toEqual({headers: {
+        let api = $api.res();
+        api.auth('authkey');
+        api.setHeaders({content: 'first'});
+        expect(api.dumpAxiosConfig()).toEqual({headers: {
             Authorization: 'Bearer authkey',
             content: 'first',
         }});

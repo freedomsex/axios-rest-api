@@ -19,35 +19,41 @@ describe('Omit Empty:', () => {
     });
 
     it('object', async () => {
-        await $api.res('some').load({q: 1, a: {b: 1, c: 2}}).catch(() => {});
-        expect($api.lastAxiosConfig().params).toEqual({q: 1, a: {b: 1, c: 2}}); 
+        let api = $api.res('some');
+        await api.load({q: 1, a: {b: 1, c: 2}}).catch(() => {});
+        expect(api.lastAxiosConfig().params).toEqual({q: 1, a: {b: 1, c: 2}}); 
     });
 
     it('empty object', async () => {
-        await $api.res('some').load({q: 1, a: {}}).catch(() => {});
-        expect($api.lastAxiosConfig().params).toEqual({q: 1}); 
+        let api = $api.res('some');
+        await api.load({q: 1, a: {}}).catch(() => {});
+        expect(api.lastAxiosConfig().params).toEqual({q: 1}); 
     });
 
     it('null', async () => {
-        await $api.res('some').load({q: 1, a: null}).catch(() => {});
-        expect($api.lastAxiosConfig().params).toEqual({q: 1}); 
+        let api = $api.res('some');
+        await api.load({q: 1, a: null}).catch(() => {});
+        expect(api.lastAxiosConfig().params).toEqual({q: 1}); 
     });
 
     it('object with null', async () => {
-        await $api.res('some').load({q: 1, a: {b: 1, c: null}}).catch(() => {});
-        expect($api.lastAxiosConfig().params).toEqual({q: 1, a: {b: 1}}); 
-        await $api.res('some').load({q: null, a: {b: 1, c: 2}}).catch(() => {});
-        expect($api.lastAxiosConfig().params).toEqual({a: {b: 1, c: 2}}); 
+        let api = $api.res('some');
+        await api.load({q: 1, a: {b: 1, c: null}}).catch(() => {});
+        expect(api.lastAxiosConfig().params).toEqual({q: 1, a: {b: 1}}); 
+        await api.load({q: null, a: {b: 1, c: 2}}).catch(() => {});
+        expect(api.lastAxiosConfig().params).toEqual({a: {b: 1, c: 2}}); 
     });
 
     it('empty array', async () => {
-        await $api.res('some').load({q: 1, a: []}).catch(() => {});
-        expect($api.lastAxiosConfig().params).toEqual({q: 1}); 
+        let api = $api.res('some');
+        await api.load({q: 1, a: []}).catch(() => {});
+        expect(api.lastAxiosConfig().params).toEqual({q: 1}); 
     });
 
     it('all empty', async () => {
-        await $api.res('some').load({q: null, a: {}, c: ''}).catch(() => {});
-        expect($api.lastAxiosConfig().params).toEqual({}); 
+        let api = $api.res('some');
+        await api.load({q: null, a: {}, c: ''}).catch(() => {});
+        expect(api.lastAxiosConfig().params).toEqual({}); 
     });
   
 });
