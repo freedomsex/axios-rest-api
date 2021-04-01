@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   output: {
-    libraryTarget: 'amd', 
+    libraryTarget: 'commonjs2', 
   },
   externals: {
     axios: 'axios', 
