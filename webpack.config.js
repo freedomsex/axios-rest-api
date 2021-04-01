@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   output: {
-    libraryTarget: 'umd', 
+    libraryTarget: 'amd', 
   },
   externals: {
     axios: 'axios', 
