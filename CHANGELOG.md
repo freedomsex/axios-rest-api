@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/freedomsex/axios-rest-api/compare/v2.0.1...v2.0.2) (2021-04-01)
+
+
+### Bug Fixes
+
+* amd module build ([042f4de](https://github.com/freedomsex/axios-rest-api/commit/042f4deaf6c2b4edc061b0fc8bf37f88a5b2c365))
+
 ### [2.0.1](https://github.com/freedomsex/axios-rest-api/compare/v2.0.0...v2.0.1) (2020-10-13)
 
 
