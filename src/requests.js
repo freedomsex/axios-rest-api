@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { delay, mapObject, isObject, isEmpty, pick, isNull, isNaN, isUndefined } from 'underscore';
 import axios from 'axios';
 
 export default class requests {
@@ -74,16 +74,16 @@ export default class requests {
       return params;
     } 
     function prune(object) {
-      object = _.mapObject(object, value => {
-        if (_.isObject(value)) {
-          if (_.isEmpty(value)) {
+      object = mapObject(object, value => {
+        if (isObject(value)) {
+          if (isEmpty(value)) {
             return null;
           }
           return prune(value);
         }
         return value;
       });
-      return _.pick(object, value => value !== '' && !_.isNull(value) && !_.isNaN(value) && !_.isUndefined(value));
+      return pick(object, value => value !== '' && !isNull(value) && !isNaN(value) && !isUndefined(value));
     }
     return prune(params);
   }
@@ -125,7 +125,7 @@ export default class requests {
       return Promise.resolve();
     }
     return new Promise((resolve) => {
-      _.delay(resolve, seconds * 1000);
+      delay(resolve, seconds * 1000);
     });
   }
 }

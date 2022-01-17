@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { extend } from 'underscore';
 import routes from './assets/routes';
 
 export default class Router {
@@ -21,7 +21,7 @@ export default class Router {
     this.routing = {
       route: resource,
     };
-    _.extend(this.routing, routes, routing);
+    extend(this.routing, routes, routing);
     return this;
   }
  

@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { defaults, extend } from 'underscore';
 import Builder from './builder';
 
 export default class Api {
@@ -22,17 +22,17 @@ export default class Api {
   }
 
   extend(name, resource) {
-    _.extend(this.resources[name], resource);
+    extend(this.resources[name], resource);
     return this;
   }
 
   getConfig(name) { 
     const config = this.resources[name] || {}; 
     const copy = Object.assign({}, config);
-    return _.defaults(copy, this.resources.default); 
+    return defaults(copy, this.resources.default); 
   }
 
-  res(resource, name) {
+  res(resource, name, authorized) {
     let builder = new Builder(this); 
     builder.setApi(this.getConfig(name || resource));
     builder.setResource(this.getConfig(resource), resource);
@@ -47,6 +47,11 @@ export default class Api {
         this.default('key', key); 
       } 
     }
+    return this;
+  }
+
+  public() {
+    builder.public();
     return this;
   }
    

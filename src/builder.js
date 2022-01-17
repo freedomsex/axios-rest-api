@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { defaults, extend } from 'underscore';
 import Router from './router';
 import Requests from './requests';
 
@@ -38,8 +38,8 @@ export default class Builder extends Requests  {
 
     setHeaders(headers) { 
       if (headers) {
-        _.defaults(this.config, { headers: {} });
-        _.extend(this.config.headers, headers);
+        defaults(this.config, { headers: {} });
+        extend(this.config.headers, headers);
       }    
       return this;
     } 
@@ -64,6 +64,13 @@ export default class Builder extends Requests  {
         return this;
     }
 
+    public() {
+      if (this.config.headers && this.config.headers.Authorization) {
+        delete this.config.headers.Authorization;
+      }
+      return this;
+    }
+
     baseURL() {
       return this.root;
     }
@@ -73,7 +80,7 @@ export default class Builder extends Requests  {
     }
 
     setAxiosConfig(config) {
-      _.extend(this.config, config);
+      extend(this.config, config);
       return this;
     }
  
