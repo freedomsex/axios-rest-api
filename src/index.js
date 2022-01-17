@@ -32,9 +32,9 @@ export default class Api {
     return defaults(copy, this.resources.default); 
   }
 
-  res(resource, name, authorized) {
+  res(resource, name, isPublic) {
     let builder = new Builder(this); 
-    builder.setApi(this.getConfig(name || resource));
+    builder.setApi(this.getConfig(name || resource), isPublic);
     builder.setResource(this.getConfig(resource), resource);
     return builder;
   }

@@ -11,7 +11,7 @@ export default class Builder extends Requests  {
         this.router = new Router();
     }
 
-    setApi(config) {
+    setApi(config, isPublic) {
         this.router.init(
             config.host, 
             config.prefix, 
@@ -19,7 +19,7 @@ export default class Builder extends Requests  {
             config.postfix
         ); 
         this.setDelay(config.delay);
-        if (!this.isAuth() && config.authorized !== false) {
+        if (!this.isAuth() && !isPublic && config.authorized !== false) {
             this.auth(config.key);
         }
         return this; 
