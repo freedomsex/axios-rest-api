@@ -39,11 +39,6 @@ export default class Api {
     this.builder.setResource(this.getConfig(resource), resource);
     return this.builder;
   }
-
-  sub(path, subId) {
-    this.builder.setSubResource(path, subId);
-    return this.builder;
-  }
   
   auth(key, name) { 
     if (key) {

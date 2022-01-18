@@ -66,8 +66,11 @@ export default class Router {
       result = action;
     }
     if (this.subresource) {
-      result = `${result}/${this.subresource}/{subId}`;
-    }
+      result = `${result}/${this.subresource}`;
+      if (this.subId) {
+        result = `${result}/${this.subId}`;
+      } 
+    }  
     return result;
   }
 
