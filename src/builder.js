@@ -31,7 +31,7 @@ export default class Builder extends Requests  {
         return this;
     }
 
-    setSubResource(path, subId) {
+    sub(path, subId) {
       this.router.setSubResource(path, subId);
       return this;
     }
