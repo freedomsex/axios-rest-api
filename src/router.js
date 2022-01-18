@@ -35,7 +35,7 @@ export default class Router {
       delete params[token];
       return slug;
     });
-    if (params.subId) {
+    if (params && params.subId) {
       this.setSubId(subId);
       delete params.subId;
     }
