@@ -40,8 +40,8 @@ export default class Api {
     return this.builder;
   }
 
-  sub(path) {
-    this.builder.setSubResource(path);
+  sub(path, subId) {
+    this.builder.setSubResource(path, subId);
     return this.builder;
   }
   

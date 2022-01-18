@@ -7,7 +7,8 @@ export default class Router {
     this.url = '';
     this.routing = routes;
     this.params = {};
-    this.subresource = null;
+    this.subresource;
+    this.subId;
   }
 
   init(host, prefix, version, postfix) {
@@ -16,6 +17,7 @@ export default class Router {
     const post = postfix ? `${postfix}/` : '';
     this.root = `${host}/${pre}${ver}${post}`;
     this.subresource = null;
+    this.subId = null;
     return this; 
   }
 
@@ -33,12 +35,23 @@ export default class Router {
       delete params[token];
       return slug;
     });
+    if (params.subId) {
+      this.setSubId(subId);
+      delete params.subId;
+    }
     // console.log('url: ', [this.root, result, params]);
     this.params = params || {};
     return result;
   }
 
-  setSubResource(path) {
+  setSubId(subId) {
+    if (subId) {
+      this.subId = subId;
+    } 
+  }
+
+  setSubResource(path, subId) {
+    this.setSubId(subId);
     this.subresource = path;
   }
 
