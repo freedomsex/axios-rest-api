@@ -7,6 +7,7 @@ export default class Api {
     this.defaults = {}; 
     this.axiosConfig = axiosConfig;
     this.omitEmptyParams = omitEmptyParams;
+    this.builder;
   }
 
   default(key, val) {
@@ -33,10 +34,15 @@ export default class Api {
   }
 
   res(resource, name, isPublic) {
-    let builder = new Builder(this); 
-    builder.setApi(this.getConfig(name || resource), isPublic);
-    builder.setResource(this.getConfig(resource), resource);
-    return builder;
+    this.builder = new Builder(this); 
+    this.builder.setApi(this.getConfig(name || resource), isPublic);
+    this.builder.setResource(this.getConfig(resource), resource);
+    return this.builder;
+  }
+
+  sub(path) {
+    this.builder.setSubResource(path);
+    return this.builder;
   }
   
   auth(key, name) { 
@@ -51,8 +57,8 @@ export default class Api {
   }
 
   public() {
-    builder.public();
-    return this;
+    this.builder.public();
+    return this.builder;
   }
    
 }

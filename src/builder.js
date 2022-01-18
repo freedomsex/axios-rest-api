@@ -31,6 +31,11 @@ export default class Builder extends Requests  {
         return this;
     }
 
+    setSubResource(path) {
+      this.router.setSubResource(path);
+      return this;
+    }
+
     setDelay(sec) {
       this.wait = sec || 0;
       return this;

@@ -7,6 +7,7 @@ export default class Router {
     this.url = '';
     this.routing = routes;
     this.params = {};
+    this.subresource = null;
   }
 
   init(host, prefix, version, postfix) {
@@ -14,6 +15,7 @@ export default class Router {
     const pre = prefix ? `${prefix}/` : '';
     const post = postfix ? `${postfix}/` : '';
     this.root = `${host}/${pre}${ver}${post}`;
+    this.subresource = null;
     return this; 
   }
 
@@ -36,6 +38,10 @@ export default class Router {
     return result;
   }
 
+  setSubResource(path) {
+    this.subresource = path;
+  }
+
   getUrlPath(method) {
     let result;  
     const {route} = this.routing;
@@ -45,6 +51,9 @@ export default class Router {
       result = `${result}/${action}`;
     } else if (action) {
       result = action;
+    }
+    if (this.subresource) {
+      result = `${result}/${this.subresource}/{subId}`;
     }
     return result;
   }
