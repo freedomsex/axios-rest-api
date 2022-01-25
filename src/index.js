@@ -5,6 +5,7 @@ export default class Api {
   constructor(resources, axiosConfig, omitEmptyParams) {
     this.resources = resources || [];
     this.defaults = {}; 
+    this.config = {}; 
     this.axiosConfig = axiosConfig;
     this.omitEmptyParams = omitEmptyParams;
     this.builder;
@@ -35,7 +36,8 @@ export default class Api {
 
   res(resource, name, isPublic) {
     this.builder = new Builder(this); 
-    this.builder.setApi(this.getConfig(name || resource), isPublic);
+    this.config = this.getConfig(name || resource);
+    this.builder.setApi(this.config, isPublic);
     this.builder.setResource(this.getConfig(resource), resource);
     return this.builder;
   }
@@ -56,8 +58,8 @@ export default class Api {
     return this.builder;
   }
 
-  private(name, resource) {
-    this.builder.private(this.getConfig(name || resource));
+  private() {
+    this.builder.private(this.config);
     return this.builder;
   }
    
