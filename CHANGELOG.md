@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.5](https://github.com/freedomsex/axios-rest-api/compare/2.1.4...2.1.5) (2022-01-25)
+
+
+### Bug Fixes
+
+* private ([e24cd10](https://github.com/freedomsex/axios-rest-api/commit/e24cd10128c815d49a0b3faf00e9c25c7125606f))
+
 ### [2.1.4](https://github.com/freedomsex/axios-rest-api/compare/2.1.3...2.1.4) (2022-01-18)
 
 
