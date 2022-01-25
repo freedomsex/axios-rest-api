@@ -56,8 +56,8 @@ export default class Api {
     return this.builder;
   }
 
-  private() {
-    this.builder.private();
+  private(name, resource) {
+    this.builder.private(this.getConfig(name || resource));
     return this.builder;
   }
    

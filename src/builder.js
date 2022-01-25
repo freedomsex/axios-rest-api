@@ -76,7 +76,7 @@ export default class Builder extends Requests  {
       return this;
     }
 
-    private() {
+    private(config) {
       if (!this.isAuth()) {
         this.auth(config.key);
       }
