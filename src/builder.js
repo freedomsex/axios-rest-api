@@ -70,8 +70,15 @@ export default class Builder extends Requests  {
     }
 
     public() {
-      if (this.config.headers && this.config.headers.Authorization) {
+      if (this.isAuth()) {
         delete this.config.headers.Authorization;
+      }
+      return this;
+    }
+
+    private() {
+      if (!this.isAuth()) {
+        this.auth(config.key);
       }
       return this;
     }

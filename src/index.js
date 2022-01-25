@@ -55,5 +55,10 @@ export default class Api {
     this.builder.public();
     return this.builder;
   }
+
+  private() {
+    this.builder.private();
+    return this.builder;
+  }
    
 }
