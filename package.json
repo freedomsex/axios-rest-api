@@ -6,7 +6,7 @@
   "module": "src/index.js",
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "axios": "^0.20.0",
+    "axios": "^0.21.2",
     "underscore": "^1.10.2"
   },
   "scripts": {
